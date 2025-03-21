@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineer 学習プラン</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 {
+            color: #2a4365;
+            margin-bottom: 16px;
+        }
+
+        a {
+            color: #3182ce;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: #edf2f7;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex: 1 1 calc(33% - 16px);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3182ce;
+            color: #ffffff;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Engineer 学習プラン</h1>
+        <p>長期的な視点でチームの能力向上とプロジェクト成功を目指すための学習プランです。</p>
+        
+        <h2>目的</h2>
+        <div class="cards">
+            <div class="card"><strong>段階的なスキル習得を支援</strong><br>各スキルをレベルごとに体系化し、初心者から中堅、上級者までが自分の進捗に合わせて学習を進められるようにする。これにより、スキルが徐々に深化し、確実にプロフェッショナルなレベルに到達することを目指す。</div>
+            <div class="card"><strong>実践と理論のバランスをとる</strong><br>学習と実践を同時に取り入れることで、理論を学んだだけでなく、実際のプロジェクトやタスクで即座に活用できるように設計する。特に、実践によってスキルが深まり、プロジェクトに対して自信を持って貢献できるようになることを目指す。</div>
+            <div class="card"><strong>具体的な教材で効率的な学習を促進</strong><br>書籍やオンライン教材を通じて、各レベルごとの学びの道筋を提供する。これにより、「何を教材とするか悩む時間」を減らし効率的に必要な知識とスキルを得ることを目指す。</div>
+            <div class="card"><strong>長期的なキャリア成長を支える</strong><br>単に一時的なスキル習得にとどまらず、プロダクト戦略やデザイン全般におけるリーダーシップを発揮できる上級レベルまでの成長を見据え、キャリアの成長にもつなげる。</div>
+            <div class="card"><strong>チーム全体への貢献力の向上</strong><br>学習を通じて個々のスキルを高めることで、プロジェクト全体の成功や、チームメンバーへの適切なリーダーシップ、効率的なコミュニケーションを実現できるようになることを目指す。</div>
+        </div>
+
+        
+        <!-- (以降のtableコードは省略なしでそのまま) -->
+        <h2>必修技術</h2>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>内容</th>
+                    <th>ステップ 1: 基礎</th>
+                    <th>ステップ 2: 実践</th>
+                    <th>ステップ 3: リーディング</th>
+                </tr>
+                <tr>
+                    <th>Linux</th>
+                    <td>
+                        目標: 基本的なコマンド・ファイル編集を理解し、最低限の業務で応用できるレベルに達する<br><br>
+                        <a href="https://qiita.com/satohiro/items/e1194214306bce7bcf20" target="_blank">【初学者用】Linuxを基礎から徹底解説</a>
+                    </td>
+                    <td>
+                        目標: パッケージ・プロセス管理を理解し、プロダクト開発の質を高める<br><br>
+                        <a href="" target="_blank">実践課題 (LINUX) </a>
+                    </td>
+                    <td>
+                        目標: ログ・サービス管理を理解し、プロダクト開発をリードし、チーム全体をまとめる<br><br>
+                        <a href="" target="_blank">書籍（Linuxの仕組み）</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Docker</th>
+                    <td>Dockerの基本概念・基本的なコマンド操作<br><a href="https://sol-satoru.hatenablog.com/entry/2022/01/04/162855" target="_blank">コンテナとDockerの概要・操作</a></td>
+                    <td>Dockerfile作成・docker-composeの使用<br><a href="https://sol-satoru.hatenablog.com/entry/2022/01/04/162855" target="_blank">コンテナの操作以降</a></td>
+                    <td>ベストプラクティスに従ったDockerfile作成<br><a href="https://docs.docker.jp/develop/develop-images/dockerfile_best-practices.html" target="_blank">Dockerfileベストプラクティス</a></td>
+                </tr>
+                <tr>
+                    <th>Git</th>
+                    <td>基本的なコマンド理解<br><a href="" target="_blank"></a></td>
+                    <td colspan="2">ブランチ戦略への理解<br><a href="https://qiita.com/Yu-kiFujiwara/items/40b503683d6525c8d274" target="_blank">Qiita ブランチ戦略</a></td>
+                </tr>
+                <tr>
+                    <th>HTML/CSS</th>
+                    <td>HTML・CSSの基礎<br><a href="https://developer.mozilla.org/ja/docs/Web/HTML" target="_blank">MDN HTML</a><br><a href="https://developer.mozilla.org/ja/docs/Web/CSS" target="_blank">MDN CSS</a><br><a href="https://geotjp.udemy.com/course/the-web-developer-bootcamp-2021-japan" target="_blank">HTML/CSS部分</a></td>
+                    <td colspan="2">HTML・CSSの実践<br><a href="" target="_blank">実践課題</a></td>
+                </tr>
+                <tr>
+                    <th>JavaScript</th>
+                    <td>基本的な文法と構文<br><a href="" target="_blank">JavaScript部分</a></td>
+                    <td colspan="2">JavaScript<br><a href="" target="_blank">実践課題</a></td>
+                </tr>
+                <tr>
+                    <th>React</th>
+                    <td>React基礎・ユニットテスト・MUI or Chakra UI基礎<br>
+                        <a href="https://ja.react.dev/learn" target="_blank">React公式</a><br>
+                        <a href="https://ja.vite.dev/guide/" target="_blank">Vite公式</a><br>
+                        <a href="https://jestjs.io/ja/" target="_blank">Jest公式</a><br>
+                        <a href="https://mui.com/material-ui/getting-started/" target="_blank">MUI</a> or 
+                        <a href="https://v0.chakra-ui.com/getting-started" target="_blank">Chakra UI</a><br>
+                    </td>
+                    <td colspan="2">Reactの状態管理<br>
+                        <td colspan="2">JavaScript<br><a href="" target="_blank">実践課題</a></td>
+                    </td>
+                </tr>
+                <tr>
+                    <th>TypeScript</th>
+                    <td>基本的な文法・構文・ユニットテスト・高度な型定義<br><a href="https://geotjp.udemy.com/course/understanding-typescript-jp/" target="_blank"></a></td>
+                    <td colspan="2">モジュール化・型定義ファイル<br><a href="https://geotjp.udemy.com/course/understanding-typescript-jp/" target="_blank"></a></td>
+                </tr>
+                <tr>
+                    <th>Backend (TypeScript)</th>
+                    <td>基本的なWebAPIの実装・テスト<br>
+                        <a href="https://geotjp.udemy.com/course/nodejs-comp-guide/" target="_blank"> </a><br>
+                        <a href="https://geotjp.udemy.com/course/understanding-typescript-jp/" target="_blank"> </a><br>
+                        <a href="https://www.amazon.co.jp/dp/4873119235" target="_blank">書籍: ハンズオンNode.js</a><br>
+                        <a href="" target="_blank">実践課題</a>
+                    </td>
+                    <td>REST APIの実装・expressのミドルウェア<br>
+                        <a href="https://geotjp.udemy.com/course/nodejs-comp-guide/" target="_blank"> </a><br>
+                        <a href="https://geotjp.udemy.com/course/rest-webapi-development/" target="_blank"> REST API開発</a><br>
+                        <a href="https://www.amazon.co.jp/dp/4873119235" target="_blank">書籍: ハンズオンNode.js</a><br>
+                        <a href="" target="_blank">実践課題</a>
+                    </td>
+                    <td>エラーハンドリング・イベントエミッター<br>
+                        <a href="https://expressjs.com/ja/guide/error-handling.html" target="_blank">Express公式ガイド</a><br>
+                        <a href="https://www.amazon.co.jp/dp/4873119235" target="_blank">書籍: ハンズオンNode.js</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Domain Driven Design (DDD)</th>
+                    <td>SOLIDの原則・DDDの基本的な概念<br>
+                        <a href="https://geotjp.udemy.com/course/typescript-solid-design-patterns/" target="_blank"></a><br>
+                        <a href="https://booth.pm/ja/items/1835632" target="_blank">書籍</a>
+                    </td>
+                    <td>Clean Architecture (Onion Architecture)<br>
+                        <a href="https://booth.pm/ja/items/1835632" target="_blank">書籍</a><br>
+                        <a href="https://www.amazon.co.jp/dp/4048930656" target="_blank">Clean Architecture</a>
+                    </td>
+                    <td>DDDの戦略的パターン実践<br>
+                        <a href="https://www.amazon.co.jp/dp/481440073X" target="_blank">書籍</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Python</th>
+                    <td>基本的な文法と構文・pipenv、poetryによるパッケージ管理・PyTestを用いたユニットテスト・適切な責務でのモジュール化<br>
+                        <a href="https://docs.python.org/ja/3.11/tutorial/index.html" target="_blank">Python公式チュートリアル</a><br>
+                        <a href="https://pipenv-ja.readthedocs.io/ja/translate-ja/basics.html" target="_blank">Pipenv公式</a><br>
+                        <a href="https://cocoatomo.github.io/poetry-ja/" target="_blank">Poetry公式</a><br>
+                        <a href="https://docs.python.org/ja/3.11/reference/import.html" target="_blank">モジュール化</a>
+                    </td>
+                    <td>Pydanticを用いたモデル定義・バリデーション<br>
+                        <a href="https://docs.pydantic.dev/latest/concepts/models/" target="_blank">Pydantic公式</a>
+                    </td>
+                    <td>非同期処理(asyncio)・マルチスレッド(threading)<br>
+                        <a href="https://docs.python.org/ja/3.11/library/asyncio.html" target="_blank">Asyncio公式</a><br>
+                        <a href="https://docs.python.org/ja/3.11/library/threading.html" target="_blank">Threading公式</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>FastAPI</th>
+                    <td>FastAPIサーバーセットアップ<br>PostgreSQL DBへのクエリ処理<br>トランザクション処理<br>TestClientを用いたユニットテスト<br>e2eテスト実装<br>
+                        <a href="https://docs.sqlalchemy.org/en/20/orm/quickstart.html" target="_blank">SQLAlchemy Quickstart</a><br>
+                        <a href="https://docs.sqlalchemy.org/en/20/orm/session_basics.html" target="_blank">SQLAlchemy Sessions</a>
+                    </td>
+                    <td colspan="2">REST API設計・実装・ミドルウェア活用実装<br>
+                        <a href="https://cloud.google.com/apis/design?hl=ja" target="_blank">Google API Design</a><br>
+                        <a href="https://aws.amazon.com/jp/what-is/restful-api/" target="_blank">AWS RESTful API</a><br>
+                        <a href="https://qiita.com/masato44gm/items/dffb8281536ad321fb08" target="_blank">Qiita REST API入門</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>SQL/PostgreSQL</th>
+                    <td>基本的な検索SQL構文・空間検索実行<br><a href="https://www.postgresql.jp/document/15/html/tutorial-sql.html" target="_blank">チュートリアル</a></td>
+                    <td colspan="2">Trigger・Partition Tableの理解<br>
+                        <a href="https://www.postgresql.jp/docs/15/plpgsql-trigger.html">https://www.postgresql.jp/docs/15/plpgsql-trigger.html</a><br>
+                        <a href="https://www.postgresql.jp/document/15/html/ddl-partitioning.html">https://www.postgresql.jp/document/15/html/ddl-partitioning.html</a><br>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+</body>
+</html>
