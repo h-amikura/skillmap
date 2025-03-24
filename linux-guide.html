@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Linux業務練習シミュレーター</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      height: 100vh;
+      background-color: #1e1e1e;
+      color: #ccc;
+      font-family: monospace;
+    }
+    .sidebar {
+      width: 280px;
+      background-color: #282828;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .sidebar h3 {
+      color: #fff;
+    }
+    .sidebar ul {
+      padding: 0;
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin: 10px 0;
+      cursor: pointer;
+    }
+    .sidebar ul li:hover {
+      text-decoration: underline;
+    }
+    .main {
+      flex-grow: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .terminal {
+      background: #333;
+      padding: 1em;
+      border-radius: 5px;
+      height: 70vh;
+      overflow-y: auto;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 1em;
+      font-family: monospace;
+      background: #444;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar" id="sidebar"></div>
+
+  <div class="main">
+    <div class="terminal" id="terminal"></div>
+    <input type="text" id="command" placeholder="コマンドを入力してください" />
+  </div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const commandInput = document.getElementById('command');
+
+    let currentDirectory = '/home/se_user';
+
+    const directoryStructure = {
+      '/home/se_user': ['Desktop', 'Documents', 'Downloads', 'Pictures', 'Videos'],
+      '/home/se_user/Desktop': ['README.txt'],
+      '/home/se_user/Documents': ['report.docx', 'resume.pdf'],
+      '/home/se_user/Downloads': ['installer.sh'],
+      '/home/se_user/Pictures': ['screenshot.png'],
+      '/home/se_user/Videos': []
+    };
+
+    const staticResponses = {
+      'whoami': 'se_user',
+      'date': new Date().toString(),
+      'uname': 'Linux server01 5.15.0-84-generic x86_64',
+      'uname -a': 'Linux server01 5.15.0-84-generic #94~20.04.1-Ubuntu SMP x86_64 GNU/Linux',
+      'df': 'Filesystem     1K-blocks    Used Available Use% Mounted on\n/dev/sda1      20480000 10240000  10240000  50% /',
+      'ps': '  PID TTY          TIME CMD\n 1234 pts/0    00:00:00 bash\n 2345 pts/0    00:00:00 top',
+      'ifconfig': 'eth0      Link encap:Ethernet  HWaddr 00:1a:2b:3c:4d:5e\n          inet addr:192.168.1.100  Bcast:192.168.1.255  Mask:255.255.255.0',
+      'ip': '2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500\n    inet 192.168.1.100/24 brd 192.168.1.255 scope global eth0'
+    };
+
+    function appendLog(message) {
+      const logs = JSON.parse(localStorage.getItem('syslog') || '[]');
+      logs.push(`${new Date().toLocaleString()} ${message}`);
+      localStorage.setItem('syslog', JSON.stringify(logs));
+    }
+
+    function getLog(tailLines = null) {
+      const logs = JSON.parse(localStorage.getItem('syslog') || '[]');
+      return tailLines ? logs.slice(-tailLines).join('\n') : logs.join('\n');
+    }
+
+    function handleCommand(cmd) {
+      if (cmd === 'pwd') return currentDirectory;
+      if (cmd === 'ls') return (directoryStructure[currentDirectory] || []).join('\n');
+      if (cmd.startsWith('cd ')) {
+        const target = cmd.slice(3).trim();
+        const newPath = target.startsWith('/') ? target : `${currentDirectory}/${target}`;
+        if (directoryStructure[newPath]) {
+          currentDirectory = newPath;
+          return '';
+        } else {
+          return `cd: ${target}: No such file or directory`;
+        }
+      }
+      if (cmd === 'cat /var/log/syslog') return getLog();
+      if (cmd.startsWith('tail -n ')) {
+        const match = cmd.match(/tail -n (\\d+)/);
+        const n = match ? parseInt(match[1], 10) : 10;
+        return getLog(n);
+      }
+      if (cmd.includes('grep error')) {
+        const logs = getLog().split('\n');
+        return logs.filter(line => line.toLowerCase().includes('error')).join('\n') || '該当するログはありません';
+      }
+      return staticResponses[cmd] || `コマンドが見つかりません: ${cmd}`;
+    }
+
+    commandInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        const cmd = commandInput.value.trim();
+        terminal.innerHTML += `<div>se_user@server01:~$ ${cmd}</div>`;
+        appendLog(`Executed command: ${cmd}`);
+        const output = handleCommand(cmd);
+        terminal.innerHTML += `<pre>${output}</pre>`;
+        terminal.scrollTop = terminal.scrollHeight;
+        commandInput.value = '';
+      }
+    });
+
+    function selectChallenge(cmd) {
+      commandInput.value = cmd;
+      commandInput.focus();
+    }
+
+    // サイドバーに業務課題を追加
+    const challengeList = [
+      { title: '作業ディレクトリを表示する', command: 'pwd' },
+      { title: 'ログイン中のユーザーを確認する', command: 'whoami' },
+      { title: '現在のディレクトリ内のファイル一覧を表示する', command: 'ls' },
+      { title: 'Documents ディレクトリへ移動する', command: 'cd Documents' },
+      { title: 'ログファイルの全文を表示する', command: 'cat /var/log/syslog' },
+      { title: 'ログファイルの末尾10行を表示する', command: 'tail -n 10 /var/log/syslog' },
+      { title: 'エラーログのみ抽出して表示する', command: 'grep error /var/log/syslog' },
+      { title: 'システム情報を表示する', command: 'uname -a' },
+      { title: 'ディスク使用状況を確認する', command: 'df' },
+      { title: 'プロセス状況を確認する', command: 'ps' }
+    ];
+
+    const sidebar = document.getElementById('sidebar');
+    sidebar.innerHTML = '<h3>業務課題</h3><ul>' +
+      challengeList.map(item => `<li onclick="selectChallenge('${item.command}')">${item.title}</li>`).join('') +
+      '</ul>';
+  </script>
+</body>
+</html>

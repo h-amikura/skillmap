@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML入門課題サイト（ダッシュボード付き）</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            margin: 0;
+            height: 100vh;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .sidebar ul li:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            font-family: monospace;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        #preview {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>課題一覧</h3>
+    <ul>
+        <li onclick="selectChallenge(1)">課題1: 自己紹介ページ</li>
+        <li onclick="selectChallenge(2)">課題2: リスト作成</li>
+        <li onclick="selectChallenge(3)">課題3: リンク付きページ</li>
+        <li onclick="selectChallenge(4)">課題4: 画像を表示する</li>
+        <li onclick="selectChallenge(5)">課題5: テーブルを作成する</li>
+        <li onclick="selectChallenge(6)">課題6: フォームを作成する</li>
+        <li onclick="selectChallenge(7)">課題7: 箇条書きリストを作成する</li>
+        <li onclick="selectChallenge(8)">課題8: 動画を埋め込む</li>
+        <li onclick="selectChallenge(9)">課題9: 見出しと段落を組み合わせる</li>
+        <li onclick="selectChallenge(10)">課題10: HTMLで簡単な日記を書く</li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <h2 id="challenge-title">HTML入門課題</h2>
+    <p id="challenge-desc">課題を左側のリストから選択してください。</p>
+
+    <textarea id="userCode"></textarea>
+    <br>
+    <button onclick="previewCode()">プレビューする</button>
+
+    <div id="preview"></div>
+</div>
+
+<script>
+const challenges = {
+    1: { title: "自己紹介ページ", desc: "h1タグとpタグを使って自己紹介ページを作りましょう。", code: "<h1>私の名前</h1>\n<p>ここに自己紹介文を書いてください。</p>" },
+    2: { title: "リスト作成", desc: "ulタグとliタグを使って好きな食べ物をリスト表示しましょう。", code: "<h2>好きな食べ物リスト</h2>\n<ul>\n<li>りんご</li>\n<li>みかん</li>\n<li>バナナ</li>\n</ul>" },
+    3: { title: "リンク付きページ", desc: "aタグを使って好きなWebサイトへのリンクを作りましょう。", code: "<h2>おすすめのサイト</h2>\n<a href='https://www.example.com'>リンクはこちら</a>" },
+    4: { title: "画像を表示する", desc: "imgタグを使って画像を表示しましょう。", code: "<img src='https://via.placeholder.com/150' alt='サンプル画像'>" },
+    5: { title: "テーブルを作成する", desc: "tableタグを使って簡単な表を作成しましょう。", code: "<table border='1'>\n<tr><th>名前</th><th>年齢</th></tr>\n<tr><td>山田</td><td>20歳</td></tr>\n</table>" },
+    6: { title: "フォームを作成する", desc: "formタグを使って入力フォームを作成しましょう。", code: "<form><input type='text' placeholder='名前'><br><input type='submit' value='送信'></form>" },
+    7: { title: "箇条書きリストを作成する", desc: "olタグを使って番号付きリストを作成しましょう。", code: "<ol><li>項目1</li><li>項目2</li></ol>" },
+    8: { title: "動画を埋め込む", desc: "videoタグを使って動画を埋め込みましょう。", code: "<video controls><source src='sample.mp4'></video>" },
+    9: { title: "見出しと段落を組み合わせる", desc: "h2とpタグを組み合わせて文章を書きましょう。", code: "<h2>見出し</h2><p>段落テキスト</p>" },
+    10: { title: "HTMLで簡単な日記を書く", desc: "今日の出来事をHTMLで日記風に書きましょう。", code: "<h2>日記</h2><p>今日はHTMLを勉強しました。</p>" }
+};
+
+function selectChallenge(id) {
+    document.getElementById('challenge-title').textContent = challenges[id].title;
+    document.getElementById('challenge-desc').textContent = challenges[id].desc;
+    document.getElementById('userCode').value = challenges[id].code;
+    document.getElementById('preview').innerHTML = '';
+}
+
+function previewCode() {
+    document.getElementById('preview').innerHTML = document.getElementById('userCode').value;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Docker インストール手順（SPA風）</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+    .step {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .step.active {
+      display: block;
+    }
+    h1, h2 {
+      color: #007acc;
+    }
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .btn {
+      margin: 20px 10px 0 0;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      background-color: #007acc;
+      color: white;
+      cursor: pointer;
+    }
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🐳 Docker Desktop for Windows インストール手順</h1>
+
+  <div class="step active">
+    <h2>✅ ステップ①：ダウンロード</h2>
+    <ul>
+      <li>以下のページを開きます：<br>
+        👉 <a href="https://www.docker.com/products/docker-desktop" target="_blank">
+          https://www.docker.com/products/docker-desktop
+        </a>
+      </li>
+      <li>ページ中央にある「<strong>Download for Windows (Windows 10/11)</strong>」をクリック</li>
+      <li>ダウンロードが始まります（<code>Docker Desktop Installer.exe</code> というファイル）</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h2>✅ ステップ②：インストール</h2>
+    <ul>
+      <li>ダウンロードしたファイルをダブルクリックして実行</li>
+      <li>インストーラーの指示に従って「Next（次へ）」「Install（インストール）」などをクリック</li>
+      <li>インストール後、パソコンの再起動が必要な場合があります → 再起動してください</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h2>✅ ステップ③：Docker Desktopを起動</h2>
+    <ul>
+      <li>再起動後、自動でDocker Desktopが起動します</li>
+      <li>「🐳 Docker is running」の表示があれば成功！</li>
+    </ul>
+  </div>
+
+  <div class="step">
+    <h2>✅ ステップ④：動作確認（コマンドでチェック）</h2>
+    <ul>
+      <li>「Windowsキー」+「R」 → <code>cmd</code> と入力してEnter（コマンドプロンプトを開く）</li>
+      <li>以下を入力してEnter：</li>
+    </ul>
+    <pre><code>docker --version</code></pre>
+    <p>結果の例：</p>
+    <pre><code>Docker version 24.0.5, build xxxx</code></pre>
+  </div>
+
+  <div class="step">
+    <h2>🎉 お疲れさまでした！</h2>
+    <p>ここまでできれば、Dockerの準備は完了です！次はHTMLをDockerでホストしてみましょう！</p>
+  </div>
+
+  <!-- ボタン -->
+  <button class="btn" id="prevBtn">◀ 戻る</button>
+  <button class="btn" id="nextBtn">次へ ▶</button>
+
+  <script>
+    const steps = document.querySelectorAll(".step");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    let currentStep = 0;
+  
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.classList.toggle("active", i === index);
+      });
+  
+      // 戻るボタンの状態
+      prevBtn.disabled = index === 0;
+  
+      // 次へ or 完了ボタンの状態
+      if (index === steps.length - 1) {
+        nextBtn.textContent = "完了 ✅";
+      } else {
+        nextBtn.textContent = "次へ ▶";
+      }
+    }
+  
+    prevBtn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+  
+    nextBtn.addEventListener("click", () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        // 完了ボタンが押されたときの動作
+        alert("お疲れさまでした！ウィンドウを閉じます。");
+  
+        // ブラウザによっては閉じられない場合もある
+        try {
+          window.close();
+        } catch (e) {
+          console.warn("window.close() に失敗しました：", e);
+        }
+      }
+    });
+  
+    // 初期表示
+    showStep(currentStep);
+  </script>
+  
+</body>
+</html>
